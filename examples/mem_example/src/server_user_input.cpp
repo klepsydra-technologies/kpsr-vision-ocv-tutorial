@@ -22,7 +22,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <functional>
-#include <iostream>
+
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
 
 #include <klepsydra/core/time_utils.h>
 
@@ -48,9 +50,9 @@ void ServerUserInput::run() {
 }
 
 void ServerUserInput::printTestHelp() {
-    std::cout << "Keys:" << std::endl;
-    std::cout << "  q   : Quit" << std::endl;
-    std::cout << "  p   : Print help" << std::endl;
+    spdlog::info("Keys:");
+    spdlog::info("  q   : Quit");
+    spdlog::info("  p   : Print help");
 }
 
 void ServerUserInput::initializeServer() {
@@ -81,10 +83,10 @@ void ServerUserInput::updateServer() {
             printTestHelp();
             break;
         case 3: // <CTRL-C>
-            std::cout << "Keyboard caught exit signal ..." << std::endl;
+            spdlog::info("Keyboard caught exit signal ...");
             _isRunning = false;
         case 'q':
-            std::cout << "Keyboard caught exit signal ..." << std::endl;
+            spdlog::info("Keyboard caught exit signal ...");
             _isRunning = false;
             break;
 

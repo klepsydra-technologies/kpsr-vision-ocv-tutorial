@@ -25,6 +25,9 @@
 
 #include "simple_write_service.h"
 
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
+
 #include "gtest/gtest.h"
 
 #include "config.h"
@@ -50,13 +53,13 @@ TEST(ImageProcessingServiceTest, ImageProcessingServiceTest) {
 
     resultDataEventEmitter.getSubscriber()->registerListener("Test", testListener.cacheListenerFunction);
 
-    std::cout << "Starting services." << std::endl;
+    spdlog::info("Starting services.");
     writeService.startup();
     imageProcessingServiceService.startup();
 
     // Publish some integers.
     for (int i = 0; i < 1; i++) {
-        std::cout << "Executing services." << std::endl;
+        spdlog::info("Executing services.");
         writeService.runOnce();
         imageProcessingServiceService.runOnce();
 
